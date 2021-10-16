@@ -30,9 +30,7 @@ import path = require('path')
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] })
 const cmd = new Slash(client, {
   path: path.join(__dirname, '/commands'),
-  slashType: 'GUILD',
   loadType: 'FILE',
-  guildId: 'Your_guild_id',
 })
 
 cmd.loadCommand()
@@ -69,9 +67,7 @@ const path = require('path')
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] })
 const cmd = new Slash(client, {
   path: path.join(__dirname, '/commands'),
-  slashType: 'GUILD',
   loadType: 'FILE',
-  guildId: 'Your_guild_id',
 })
 
 cmd.loadCommand()

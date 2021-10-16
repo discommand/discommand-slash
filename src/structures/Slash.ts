@@ -1,12 +1,17 @@
-import { Client, Collection, Snowflake } from 'discord.js'
-import { SlashOptions, slashType } from '../types'
+import { Client, Collection } from 'discord.js'
+import { SlashOptions } from '../types'
 import * as fs from 'fs'
 import { SlashCommand } from '..'
 
+/**
+ *
+ * @property {Client} client
+ * @property {string} path
+ * @property {'FILE' | 'FOLDER'} loadType
+ */
 export class Slash {
   options: SlashOptions
   client: Client
-  guildId?: Snowflake
   constructor(client: Client, options: SlashOptions) {
     this.client = client
     this.options = options
@@ -14,21 +19,41 @@ export class Slash {
 
   public commands = new Collection()
 
-  public async LoadCommand() {
+  public LoadCommand() {
     if (this.options.loadType == 'FILE') {
-      if (this.options.slashType == 'GUILD') {
-        const Files = fs.readdirSync(this.options.path)
-        for (const file of Files) {
-          const command = require(`${this.options.path}/${file}`)
-          const Command: SlashCommand = new command()
+      const Files = fs.readdirSync(this.options.path)
+      for (const file of Files) {
+        const command = require(`${this.options.path}/${file}`)
+        const Command: SlashCommand = new command()
+        if (!Command.data.name) {
+          console.error(`${file} is name required.`)
+        } else {
           this.commands.set(Command.data.name, Command)
           this.client.once('ready', () => {
             // @ts-ignore
-            // prettier-ignore
-            this.client.application!.commands.create(Command.data.toJSON(), this.guildId as Snowflake)
+            this.client.application!.commands.create(Command.data.toJSON())
+            console.log(`${Command.data.name} Registry.`)
           })
         }
-      } else if (this.options.slashType == 'GLOBAL') {
+      }
+    } else if (this.options.loadType == 'FOLDER') {
+      const Folders = fs.readdirSync(this.options.path)
+      for (const folder of Folders) {
+        const Files = fs.readdirSync(`${this.options.path}/${folder}`)
+        for (const file of Files) {
+          const command = require(`${this.options.path}/${folder}/${file}`)
+          const Command: SlashCommand = new command()
+          if (!Command.data.name) {
+            console.error(`${file} is name required.`)
+          } else {
+            this.commands.set(Command.data.name, Command)
+            this.client.once('ready', () => {
+              // @ts-ignore
+              this.client.application!.commands.create(Command.data.toJSON())
+              console.log(`${Command.data.name} Registry.`)
+            })
+          }
+        }
       }
     }
   }

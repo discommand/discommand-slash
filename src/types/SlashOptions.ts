@@ -1,9 +1,6 @@
-import { loadType, slashType } from '.'
-import { Snowflake } from 'discord.js'
+import { loadType } from '.'
 
 export type SlashOptions = {
   path: string
   loadType: loadType
-  slashType: slashType
-  guildId?: Snowflake
 }

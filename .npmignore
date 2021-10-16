@@ -1,5 +1,6 @@
-test/
-config.json
 node_modules/
+config.json
+test/
+.github/
+.vscode/
 .idea/
-.vscode

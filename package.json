@@ -1,8 +1,9 @@
 {
   "name": "discommand-slash",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "license": "MIT",
+  "types": "dist/index.d.ts",
   "devDependencies": {
     "@types/node": "^16.10.2",
     "discord.js": "^13.0.0",

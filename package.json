@@ -1,7 +1,7 @@
 {
   "name": "discommand-slash",
-  "version": "1.0.1",
-  "main": "index.js",
+  "version": "1.0.2",
+  "main": "dist/index.js",
   "license": "MIT",
   "types": "dist/index.d.ts",
   "devDependencies": {

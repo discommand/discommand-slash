@@ -21,40 +21,40 @@ export class Slash {
 
   public LoadCommand() {
     if (this.options.loadType == 'FILE') {
-      const Files = fs.readdirSync(this.options.path)
-      for (const file of Files) {
-        const command = require(`${this.options.path}/${file}`)
-        const Command: SlashCommand = new command()
-        if (!Command.data.name) {
-          console.error(`${file} is name required.`)
-        } else {
-          this.commands.set(Command.data.name, Command)
-          this.client.once('ready', () => {
-            // @ts-ignore
-            this.client.application!.commands.create(Command.data.toJSON())
-            console.log(`${Command.data.name} Registry.`)
-          })
-        }
-      }
-    } else if (this.options.loadType == 'FOLDER') {
-      const Folders = fs.readdirSync(this.options.path)
-      for (const folder of Folders) {
-        const Files = fs.readdirSync(`${this.options.path}/${folder}`)
+      this.client.once('ready', () => {
+        const Files = fs.readdirSync(this.options.path)
         for (const file of Files) {
-          const command = require(`${this.options.path}/${folder}/${file}`)
+          const command = require(`${this.options.path}/${file}`)
           const Command: SlashCommand = new command()
           if (!Command.data.name) {
             console.error(`${file} is name required.`)
           } else {
             this.commands.set(Command.data.name, Command)
-            this.client.once('ready', () => {
+            // @ts-ignore
+            this.client.application!.commands.create(Command.data.toJSON())
+            console.log(`${Command.data.name} Registry.`)
+          }
+        }
+      })
+    } else if (this.options.loadType == 'FOLDER') {
+      this.client.once('ready', () => {
+        const Folders = fs.readdirSync(this.options.path)
+        for (const folder of Folders) {
+          const Files = fs.readdirSync(`${this.options.path}/${folder}`)
+          for (const file of Files) {
+            const command = require(`${this.options.path}/${folder}/${file}`)
+            const Command: SlashCommand = new command()
+            if (!Command.data.name) {
+              console.error(`${file} is name required.`)
+            } else {
+              this.commands.set(Command.data.name, Command)
               // @ts-ignore
               this.client.application!.commands.create(Command.data.toJSON())
               console.log(`${Command.data.name} Registry.`)
-            })
+            }
           }
         }
-      }
+      })
     }
   }
 

@@ -21,7 +21,7 @@ export class Slash {
 
   public LoadCommand() {
     if (this.options.loadType == 'FILE') {
-      this.client.once('ready', () => {
+      this.client.on('ready', () => {
         const Files = fs.readdirSync(this.options.path)
         for (const file of Files) {
           const command = require(`${this.options.path}/${file}`)
@@ -37,7 +37,7 @@ export class Slash {
         }
       })
     } else if (this.options.loadType == 'FOLDER') {
-      this.client.once('ready', () => {
+      this.client.on('ready', () => {
         const Folders = fs.readdirSync(this.options.path)
         for (const folder of Folders) {
           const Files = fs.readdirSync(`${this.options.path}/${folder}`)

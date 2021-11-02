@@ -27,12 +27,12 @@ export class Slash {
           const command = require(`${this.options.path}/${file}`)
           const Command: SlashCommand = new command()
           if (!Command.data.name) {
-            console.error(`${file} is name required.`)
+            console.error(`[discommand-slash]  ${file} is name required.`)
           } else {
             this.commands.set(Command.data.name, Command)
             // @ts-ignore
             this.client.application!.commands.create(Command.data.toJSON())
-            console.log(`${Command.data.name} Registry.`)
+            console.log(`[discommand-slash] ${Command.data.name} Registry.`)
           }
         }
       })
@@ -45,12 +45,12 @@ export class Slash {
             const command = require(`${this.options.path}/${folder}/${file}`)
             const Command: SlashCommand = new command()
             if (!Command.data.name) {
-              console.error(`${file} is name required.`)
+              console.error(`[discommand-slash]  ${file} is name required.`)
             } else {
               this.commands.set(Command.data.name, Command)
               // @ts-ignore
               this.client.application!.commands.create(Command.data.toJSON())
-              console.log(`${Command.data.name} Registry.`)
+              console.log(`[discommand-slash]  ${Command.data.name} Registry.`)
             }
           }
         }

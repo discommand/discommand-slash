@@ -35,21 +35,19 @@ const cmd = new Slash(client, {
 
 cmd.loadCommand()
 
-cmd.run()
-
 client.login('your_bot_token')
 ```
 
 commands/ping.ts
 
 ```ts
-import { SlashCommand } from 'discommand-slash'
+import { SlashCommand, Slash } from 'discommand-slash'
 import { CommandInteraction } from 'discord.js'
 import { SlashCommandBuilder } from '@discordjs/builders'
 
 export = class extends SlashCommand {
   data = new SlashCommandBuilder().setName('ping').setDescription('Pong!')
-  execute(interaction: CommandInteraction) {
+  execute(interaction: CommandInteraction, slash: Slash) {
     interaction.reply('Pong!')
   }
 }
@@ -72,8 +70,6 @@ const cmd = new Slash(client, {
 
 cmd.loadCommand()
 
-cmd.run()
-
 client.login('your_bot_token')
 ```
 
@@ -85,7 +81,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders')
 
 module.exports = class extends SlashCommand {
   data = new SlashCommandBuilder().setName('ping').setDescription('Pong!')
-  execute(interaction) {
+  execute(interaction, slash) {
     interaction.reply('Pong!')
   }
 }

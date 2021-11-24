@@ -5,9 +5,9 @@ import { SlashCommand } from '..'
 
 /**
  *
- * @property {Client} client
- * @property {string} path
- * @property {'FILE' | 'FOLDER'} loadType
+ * @param {Client} client
+ * @param {string} path
+ * @param {'FILE' | 'FOLDER'} loadType
  */
 export class Slash {
   options: SlashOptions
@@ -27,7 +27,7 @@ export class Slash {
           const command = require(`${this.options.path}/${file}`)
           const Command: SlashCommand = new command()
           if (!Command.data.name) {
-            console.error(`[discommand-slash]  ${file} is name required.`)
+            console.error(`[discommand-slash] ${file} is name required.`)
           } else {
             this.commands.set(Command.data.name, Command)
             // @ts-ignore
@@ -45,20 +45,17 @@ export class Slash {
             const command = require(`${this.options.path}/${folder}/${file}`)
             const Command: SlashCommand = new command()
             if (!Command.data.name) {
-              console.error(`[discommand-slash]  ${file} is name required.`)
+              console.error(`[discommand-slash] ${file} is name required.`)
             } else {
               this.commands.set(Command.data.name, Command)
               // @ts-ignore
               this.client.application!.commands.create(Command.data.toJSON())
-              console.log(`[discommand-slash]  ${Command.data.name} Registry.`)
+              console.log(`[discommand-slash] ${Command.data.name} Registry.`)
             }
           }
         }
       })
     }
-  }
-
-  public run() {
     this.client.on('interactionCreate', async interaction => {
       if (!interaction.isCommand()) return
 

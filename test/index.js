@@ -11,5 +11,5 @@ const cmd = new Slash(client, {
 })
 
 cmd.LoadCommand()
-cmd.run()
+
 client.login(config.token)

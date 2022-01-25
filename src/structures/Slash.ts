@@ -20,6 +20,9 @@ export class Slash {
   public commands = new Collection()
 
   public LoadCommand() {
+    console.log(
+      '[discommand-slash] deprecate alert: This library will stop supporting at the end of this version. Please use the discommand 4.0 version, which will be updated on February 1, 2022.'
+    )
     if (this.options.loadType == 'FILE') {
       this.client.on('ready', () => {
         const Files = fs.readdirSync(this.options.path)
@@ -64,7 +67,7 @@ export class Slash {
       if (!command) return
 
       try {
-        await command.execute(interaction)
+        await command.execute(interaction, this)
       } catch (error) {
         console.error(error)
       }

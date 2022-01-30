@@ -21,7 +21,7 @@ export class Slash {
 
   public LoadCommand() {
     console.log(
-      '[discommand-slash] deprecate alert: This library will stop supporting at the end of this version. Please use the discommand 4.0 version, which will be updated on February 1, 2022.'
+      '[discommand-slash] Important notification: This package is no longer supported. Accordingly, please use the discommand 4.0.0 version.'
     )
     if (this.options.loadType == 'FILE') {
       this.client.on('ready', () => {

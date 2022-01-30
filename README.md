@@ -1,6 +1,6 @@
 # discommand-slash
 
-- deprecate alert: This library will stop supporting at the end of this version. Please use the discommand 4.0 version, which will be updated on February 1, 2022.
+- **This package is no longer supported. Accordingly, please use the discommand 4.0.0 version.**
 - discommand's SlashCommandHandler
 
 # Installation
